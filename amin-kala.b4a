@@ -1,0 +1,534 @@
+﻿Build1=Default,ir.taravatgroup.aminkala
+File1=2.png
+File2=attention.png
+File3=ic_logo_sidebar_transparent.png
+File4=images.png
+File5=Layout.bal
+File6=loading.gif
+File7=logo 512.png
+File8=menu_item.bal
+File9=Untitled-4-2.jpg
+FileGroup1=Default Group
+FileGroup2=Default Group
+FileGroup3=Default Group
+FileGroup4=Default Group
+FileGroup5=Default Group
+FileGroup6=Default Group
+FileGroup7=Default Group
+FileGroup8=Default Group
+FileGroup9=Default Group
+Group=Default Group
+Library1=core
+Library2=http
+Library3=httputils2
+Library4=javaobject
+Library5=phone
+Library6=xui
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="32"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.LightTheme)~\n~'End of default text.~\n~AddPermission (android.permission.INTERNET)~\n~AddPermission (android.permission.ACCESS_WIFI_STATE)~\n~AddPermission (android.permission.ACCESS_NETWORK_STATE)~\n~~\n~~\n~CreateResourceFromFile(Macro, Core.NetworkClearText)~\n~AddApplicationText(~\n~<uses-library~\n~      android:name="org.apache.http.legacy"~\n~      android:required="false" />~\n~)
+Module1=B4XLoadingIndicator
+Module2=Starter
+NumberOfFiles=9
+NumberOfLibraries=6
+NumberOfModules=2
+Version=11.5
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: امین کالا
+	#VersionCode: 3
+	#VersionName: 1
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: portrait
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen:True
+	#IncludeTitle:  False
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+	Dim tim As Timer
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	Private WebView1 As WebView
+	Private Panel1 As Panel
+	Private pan_menu As Panel
+	
+	Private pan_all_menu As Panel
+	Dim phon As Phone
+	Private pan_notconn As Panel
+	
+	Dim current_page As Int=1
+	Private lbl_shop_m As Label
+	Private lbl_class_m As Label
+	Private lbl_liked_m As Label
+	Private lbl_info_m As Label
+	Private lbl_suport_m As Label
+	Private lbl_marjoe_m As Label
+	Private lbl_qus_m As Label
+	Private lbl_account_m As Label
+	Private lbl_setting As Label
+	Private scview_menu As ScrollView
+
+	Private lbl_account As Label
+	Private lbl_cart As Label
+	Private lbl_class As Label
+	Private lbl_shop As Label
+	Private account_icon As Label
+	Private cart_icon As Label
+	Private class_icon As Label
+	Private shop_icon As Label
+	
+	
+	Dim str_shop As String = "https://amin-kala.ir/"
+	Dim str_shop2 As String = "https://amin-kala.ir/shop"
+	
+	Dim str_class As String = "https://amin-kala.ir/classify/"
+	Dim str_cart As String = "https://amin-kala.ir/cart/"
+	Dim str_accont As String = "https://amin-kala.ir/account/"
+	Dim str_fav As String = "https://amin-kala.ir/wishlist/"
+	Dim str_about As String = "https://amin-kala.ir/about-us/"
+	Dim str_call As String = "https://amin-kala.ir/contact-us/"
+	Dim str_marjoee As String = "https://amin-kala.ir/marjoee/"
+	Dim str_ques As String = "https://amin-kala.ir/faq/"
+	
+	
+	
+	
+	Private lbl_title As Label
+	Dim type_app As Int
+	Dim ht As HttpJob
+	Dim phon1 As Phone
+	Private lbl_share_app As Label
+
+	
+	Private loading As B4XLoadingIndicator
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.LoadLayout("Layout")
+	tim.Initialize("tim",4000)
+	tim.Enabled=True
+	WebView1.JavaScriptEnabled=True
+	
+	
+	
+	
+	scview_menu.Panel.LoadLayout("menu_item")
+	des_menu
+	
+	If (File.Exists(File.DirInternal,"setstart1")==True)Then
+		lbl_setting.Visible=False
+		type_app=1
+		http_initial_1(1)
+	Else If (File.Exists(File.DirInternal,"setstart2")==True)Then
+		http_initial_1(2)
+		type_app=2
+		OpenBrowser(str_shop)
+		
+		ExitApplication
+	Else
+		type_app=0
+		http_initial_1(0)
+	End If
+	
+
+	lbl_shop_Click
+	lbl_title.Text="امین کالا"
+	''-----------------------------------
+	'ProgressDialogHide
+	'loading.Hide
+	
+	
+	
+End Sub
+
+Sub WebView1_PageFinished (Url As String)
+	'ProgressDialogHide
+	
+	loading.Hide
+End Sub
+
+Sub http_initial_1(type1 As Int)
+	ht.Initialize("ht",Me)
+	Dim send As String
+	send = "username=mahdi&password=1234&div_id="&phon1.GetSettings("android_id")&"&sdk_ver="&phon1.SdkVersion&"&oprator="&phon1.GetNetworkOperatorName&"&type_app="&type1&"&div_model="&phon1.Model&"&var=0"
+	ht.PostString("https://azarfadak.com/amin-kala.php",send)
+End Sub
+ 
+
+
+
+
+
+Sub Jobdone (job As HttpJob)
+	If job.Success = True Then
+		If job.JobName="ht" Then
+			'Msgbox(job.GetString,"Success")
+		End If
+	
+	Else
+		'ToastMessageShow("خطا در برقراری اتصال" , False)
+	End If
+	
+	
+End Sub
+
+
+
+
+
+Sub des_menu
+	lbl_shop_m.Width=scview_menu.Width
+	lbl_class_m.Width=scview_menu.Width
+	lbl_liked_m.Width=scview_menu.Width
+	lbl_info_m.Width=scview_menu.Width
+	lbl_suport_m.Width=scview_menu.Width
+	lbl_marjoe_m.Width=scview_menu.Width
+	lbl_qus_m.Width=scview_menu.Width
+	lbl_account_m.Width=scview_menu.Width
+	lbl_share_app.Width=scview_menu.Width
+	lbl_setting.Width=scview_menu.Width
+	
+	
+	
+End Sub
+
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+Sub tim_Tick
+	'ProgressDialogShow("بارگذاری ...")
+	'check_conn
+	Panel1.Visible=False
+	tim.Enabled=False
+	
+	
+	If (File.Exists(File.DirInternal,"setstart2")==True)Then
+		Dim res3 As Int
+		res3 = Msgbox2("برای اجرا در مرورگر ، گوگل کروم را نصب کنید و بعد امتحان نمائید.", "توجه!", "خروج", "", "", LoadBitmap(File.DirAssets, "attention.png"))
+		If res3 = DialogResponse.Positive Then
+			ExitApplication
+		Else
+			ExitApplication
+		End If
+	End If
+	
+	
+End Sub
+	
+	
+
+
+Private Sub account_icon_Click
+	lbl_account_Click
+End Sub
+
+Private Sub lbl_account_Click
+	current_page=4
+	check_conn
+	lbl_title.Text="پرداخت"
+	WebView1.LoadUrl(str_accont)
+End Sub
+
+Private Sub lbl_cart_Click
+	cart_icon_Click
+End Sub
+
+Private Sub cart_icon_Click
+	current_page=3
+	check_conn
+	lbl_title.Text="سبد خرید"
+	WebView1.LoadUrl(str_cart)
+	
+	
+End Sub
+
+Private Sub class_icon_Click
+	lbl_class_Click
+End Sub
+
+Private Sub lbl_class_Click
+	current_page=2
+	check_conn
+	lbl_title.Text="دسته بندی"
+	WebView1.LoadUrl(str_class)
+End Sub
+
+Private Sub lbl_shop_Click
+	shop_icon_Click
+End Sub
+
+Private Sub shop_icon_Click
+	current_page=1
+	check_conn
+	lbl_title.Text="امین کالا"
+	WebView1.LoadUrl(str_shop)
+End Sub
+
+Private Sub pan_menu_Click
+	
+End Sub
+
+
+Private Sub pan_all_menu_Click
+	
+	pan_menu.SetLayout(100%x,0,70%x,100%y)
+	pan_all_menu.Visible=False
+	
+End Sub
+
+Private Sub lbl_menu_Click
+	pan_all_menu.Visible=True
+	pan_menu.SetLayout(30%x,0,70%x,100%y)
+End Sub
+
+Private Sub lbl_qus_m_Click
+	current_page=9
+	check_conn
+	lbl_title.Text="سوالات متداول"
+	WebView1.LoadUrl(str_ques)
+	pan_all_menu_Click
+End Sub
+
+Private Sub lbl_marjoe_m_Click
+	current_page=8
+	check_conn
+	lbl_title.Text="درخواست مرجوعی"
+	WebView1.LoadUrl(str_marjoee)
+	pan_all_menu_Click
+End Sub
+
+Private Sub lbl_suport_m_Click
+	current_page=7
+	check_conn
+	lbl_title.Text="تماس با پشتیبانی"
+	WebView1.LoadUrl(str_call)
+	pan_all_menu_Click
+End Sub
+
+Private Sub lbl_info_m_Click
+	current_page=6
+	check_conn
+	lbl_title.Text="درباره ما"
+	WebView1.LoadUrl(str_about)
+	pan_all_menu_Click
+End Sub
+
+Private Sub lbl_liked_m_Click
+	current_page=5
+	check_conn
+	lbl_title.Text="نشان شده ها"
+	WebView1.LoadUrl(str_fav)
+	pan_all_menu_Click
+End Sub
+
+Private Sub lbl_class_m_Click
+	class_icon_Click
+	pan_all_menu_Click
+End Sub
+
+Private Sub lbl_shop_m_Click
+	shop_icon_Click
+	pan_all_menu_Click
+End Sub
+
+
+Private Sub lbl_account_m_Click
+	current_page=4
+	check_conn
+	lbl_title.Text="حساب کاربری"
+	WebView1.LoadUrl(str_accont)
+	pan_all_menu_Click
+End Sub
+
+Sub check_conn As Boolean
+	Dim color_act As String =0xFFF44336        '0xFFFF514B                  '0xFF5280FF
+	Dim color_non As String =0xFF000000             '0xFF292929
+	
+	lbl_shop_m.Color=Colors.White
+	lbl_class_m.Color=Colors.White
+	lbl_liked_m.Color=Colors.White
+	lbl_info_m.Color=Colors.White
+	lbl_suport_m.Color=Colors.White
+	lbl_marjoe_m.Color=Colors.White
+	lbl_qus_m.Color=Colors.White
+	lbl_account_m.Color=Colors.White
+	
+	lbl_shop_m.TextColor=color_non   'yes
+	lbl_class_m.TextColor=color_non  ' no
+	lbl_liked_m.TextColor=color_non
+	lbl_info_m.TextColor=color_non
+	lbl_suport_m.TextColor=color_non
+	lbl_marjoe_m.TextColor=color_non
+	lbl_qus_m.TextColor=color_non
+	lbl_account_m.TextColor=color_non
+	lbl_cart.TextColor=color_non
+	lbl_class.TextColor=color_non
+	lbl_shop.TextColor=color_non
+	account_icon.TextColor=color_non
+	shop_icon.TextColor=color_non
+	class_icon.TextColor=color_non
+	cart_icon.TextColor=color_non
+	lbl_account.TextColor=color_non
+	Select current_page 
+		Case 1
+			lbl_shop_m.TextColor=Colors.White
+			lbl_shop.TextColor=color_act
+			shop_icon.TextColor=color_act
+			lbl_shop_m.Color=color_act
+		Case 2
+			lbl_class_m.TextColor=Colors.White
+			lbl_class_m.Color=color_act
+			lbl_class.TextColor=color_act
+			class_icon.TextColor=color_act
+		Case 3
+			lbl_cart.TextColor=color_act
+			cart_icon.TextColor=color_act
+		Case 4
+			lbl_account.TextColor=color_act
+			account_icon.TextColor=color_act
+			lbl_account_m.TextColor=Colors.White
+			lbl_account_m.Color=color_act
+		Case 5
+			lbl_liked_m.TextColor=Colors.White
+			lbl_liked_m.Color=color_act
+		Case 6
+			lbl_info_m.TextColor=Colors.White
+			lbl_info_m.Color=color_act
+		Case 7
+			lbl_suport_m.TextColor=Colors.White
+			lbl_suport_m.Color=color_act
+		Case 8
+			lbl_marjoe_m.TextColor=Colors.White
+			lbl_marjoe_m.Color=color_act
+		Case 9
+			lbl_qus_m.TextColor=Colors.White
+			lbl_qus_m.Color=color_act
+	
+			
+	End Select
+	
+	
+	
+	
+	Dim connected As Boolean =False
+	If phon.GetDataState="CONNECTED" Then
+		connected=True
+	Else If phon.GetSettings("wifi_on")=1 Then
+		connected=True
+	End If
+	If (connected=False)Then
+		pan_notconn.Visible=True
+		Else
+		pan_notconn.Visible=False
+	End If
+	
+	'ProgressDialogShow2("بارگزاری ...",True)
+	
+	loading.Show
+	
+	Return connected
+	
+	
+End Sub
+
+Private Sub pan_notconn_Click
+	
+End Sub
+
+Private Sub lbl_re_conn_Click
+	ProgressDialogShow("بارگذاری ...")
+	check_conn
+	http_initial_1(type_app)
+End Sub
+
+
+
+Private Sub Panel2_Click
+	
+End Sub
+
+
+
+Sub OpenBrowser(Link As String)
+ 
+	Dim i As Intent
+ 
+	i.Initialize(i.ACTION_VIEW,Link)
+ 
+	Dim jo As JavaObject = i
+ 
+	jo.RunMethod("setPackage", Array("com.android.chrome"))
+	
+ 
+	StartActivity(jo.RunMethod("createChooser", Array As Object(i, "برای اجرا در مرورگر ، گوگل کروم را نصب کنید و بعد امتحان نمائید.")))
+ 
+End Sub
+
+Private Sub lbl_setting_Click
+	
+	Dim result As Int
+	result = Msgbox2("روش اجرای برنامه را مشخص کنید. برای عوض کردن روش ، برنامه را حذف و دوباره نصب کنید!", "روش اجرا", "همین برنامه", "", "روش مرورگر", LoadBitmap(File.DirAssets, "attention.png"))
+	If result = DialogResponse.Positive Then 
+		' --- همین برنامه
+		
+		File.WriteString(File.DirInternal,"setstart1","")
+		lbl_setting.Visible=False
+		pan_all_menu_Click
+	Else If  result = DialogResponse.NEGATIVE Then
+		'------  روش مرورگر
+		File.WriteString(File.DirInternal,"setstart2","")
+		pan_all_menu_Click
+		Activity_Create(True)
+		
+	End If
+	
+End Sub
+
+
+
+Sub Activity_KeyPress (KeyCode As Int) As Boolean
+	If KeyCode = KeyCodes.KEYCODE_BACK Then
+		If(pan_all_menu.Visible==True)Then
+			pan_all_menu_Click
+		Else if (current_page <> 1) Then
+			shop_icon_Click
+		Else If (WebView1.Url <> str_shop )Then
+				shop_icon_Click
+		Else
+				
+			Dim res1 As Int
+			res1 = Msgbox2("آیا قصد خروج دارید؟", "خروج", "بله", "", "خیر", Null)
+			If res1 = DialogResponse.Positive Then
+				ExitApplication
+			End If
+	
+		End If
+		
+		Return True
+	Else
+		Return False
+	End If
+End Sub
+
+Private Sub lbl_share_app_Click
+
+	Dim i As Intent
+	i.Initialize(i.ACTION_SEND, "")
+	i.SetType("text/plain")
+	i.PutExtra("android.intent.extra.TEXT", "https://cafebazaar.ir/app/ir.taravatgroup.aminkala")
+	i.WrapAsIntentChooser("Select")
+	StartActivity(i)
+	
+End Sub

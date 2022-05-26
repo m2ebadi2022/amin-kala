@@ -1,0 +1,30 @@
+--release
+--output
+E:\b4a\b4a new projects\amin-kala\Objects
+--lib
+D:\androidsdk\platforms\android-31\android.jar
+D:\androidsdk\tools\..\extras\b4a_local\unpacked-b4ashared-63783445550000\dex_v1\b4ashared.zip
+D:\androidsdk\tools\..\extras\b4a_local\unpacked-core-63783445550000\dex_v1\core.zip
+D:\androidsdk\tools\..\extras\b4a_local\unpacked-http-63698174232000\dex_v1\http.zip
+D:\androidsdk\tools\..\extras\b4a_local\unpacked-httputils2-63698174232000\dex_v1\httputils2.zip
+D:\androidsdk\tools\..\extras\b4a_local\unpacked-javaobject-63783445550000\dex_v1\javaobject.zip
+D:\androidsdk\tools\..\extras\b4a_local\unpacked-phone-63783445550000\dex_v1\phone.zip
+D:\androidsdk\tools\..\extras\b4a_local\unpacked-xui-63783445550000\dex_v1\xui.zip
+D:\androidsdk\tools\..\extras\b4a_local\unpacked-stringutils-63783445550000\dex_v1\stringutils.zip
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\b4xloadingindicator$ResumableSub_MainLoop.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\b4xloadingindicator.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\main$1.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\main$B4AMenuItemsClickListener.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\main$HandleKeyDelayed.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\main$ResumeMessage.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\main$WaitForLayout.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\main.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\R$drawable.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\R$style.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\R$xml.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\R.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\starter$1.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\starter$2.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\starter$starter_BR.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\starter.dex
+E:\b4a\b4a new projects\amin-kala\Objects\dexed\ir\taravatgroup\aminkala\designerscripts\LS_layout.dex
